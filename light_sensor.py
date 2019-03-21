@@ -27,7 +27,7 @@ def rc_time (pin_to_circuit):
 try:
     # Main loop
     while True:
-        print rc_time(pin_to_circuit)
+        print (rc_time(pin_to_circuit))
 except KeyboardInterrupt:
     pass
 finally:
