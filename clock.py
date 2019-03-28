@@ -21,7 +21,7 @@ def day_to_index(argument):
 def average_light_value (seconds=60):
     pin_to_circuit = 7
 
-    results = np.array()
+    results = np.empty(0)
     timeCalled = datetime.datetime.now().second + datetime.datetime.now().minute * 60
     while (datetime.datetime.now().second + datetime.datetime.now().minute * 60 >= timeCalled + seconds ):
         count = 0
