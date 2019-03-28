@@ -38,7 +38,7 @@ def average_light_value (seconds=60):
         while (GPIO.input(pin_to_circuit) == GPIO.LOW):
             count += 1
 
-        results.append(count)
+        np.append(results, count)
 
     # GPIO.cleanup()
     return np.mean(results)
