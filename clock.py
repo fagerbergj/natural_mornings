@@ -40,7 +40,7 @@ def average_light_value (seconds=60):
 
         results.append(count)
 
-    GPIO.cleanup()
+    # GPIO.cleanup()
     return np.mean(results)
 
 
