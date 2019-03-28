@@ -31,7 +31,7 @@
           "name":"Thursday",
           "isEnabled":true,
           "time":846,
-          "lightActivated":false,
+          "lightActivated":true,
           "playSound":true,
           "openBlinds":true,
           "openWindow":true
