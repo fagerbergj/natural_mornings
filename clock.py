@@ -23,7 +23,7 @@ def average_light_value (seconds=60):
 
     results = np.empty(0)
     timeCalled = datetime.datetime.now().second + datetime.datetime.now().minute * 60
-    while (datetime.datetime.now().second + datetime.datetime.now().minute * 60 >= timeCalled + seconds ):
+    while (datetime.datetime.now().second + datetime.datetime.now().minute * 60 < timeCalled + seconds ):
         count = 0
     
         #Output on the pin for 
