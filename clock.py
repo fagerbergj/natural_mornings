@@ -22,8 +22,8 @@ def average_light_value (seconds=60):
     pin_to_circuit = 7
 
     results = np.empty(0)
-    timeCalled = datetime.datetime.now().second + datetime.datetime.now().minute * 60
-    while (datetime.datetime.now().second + datetime.datetime.now().minute * 60 < timeCalled + seconds ):
+    timeCalled = datetime.datetime.now().hour * 360 + datetime.datetime.now().second + datetime.datetime.now().minute * 60
+    while (datetime.datetime.now().hour * 360 + datetime.datetime.now().second + datetime.datetime.now().minute * 60 < timeCalled + seconds ):
         print(datetime.datetime.now().second + datetime.datetime.now().minute * 60)
         print(timeCalled + seconds)
         count = 0
@@ -63,7 +63,7 @@ with open('config.json') as json_file:
         triggered = False
         # if light activated is true
         if day['lightActivated']:
-            value = average_light_value()
+            value = average_light_value(5)
             triggered = value >= 200
             print(value)
             # read light sensor for 1 minuet
