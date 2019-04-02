@@ -43,7 +43,7 @@ def average_light_value (seconds=60):
         results = np.append(results, count)
 
     # GPIO.cleanup()
-    print(results)
+    # print(results)
     return np.mean(results)
 
 
@@ -75,6 +75,7 @@ with open('config.json') as json_file:
             dateTimeNow = datetime.datetime.now()
             nowTimeInMin = dateTimeNow.minute + dateTimeNow.hour * 60
             triggered = day['time'] == nowTimeInMin
+        print(triggered)
         if triggered:
             if day["playSound"]:
                 # play sound
