@@ -13,7 +13,7 @@
           "name":"Tuesday",
           "isEnabled":true,
           "time":423,
-          "lightActivated":false,
+          "lightActivated":true,
           "playSound":true,
           "openBlinds":true,
           "openWindow":true

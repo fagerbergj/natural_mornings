@@ -63,13 +63,13 @@ with open('config.json') as json_file:
         triggered = False
         # if light activated is true
         if day['lightActivated']:
+            # read light sensor for 1 minute
+            # average result to set triggered to true or not
             value = average_light_value(5)
             triggered = value >= 200
             print(value)
-            # read light sensor for 1 minuet
-            # average result to set triggered to true or not
         else:
-            # sleep 1 minuet
+            # sleep 1 minute
             time.sleep(6)
             # check to see if current time = time from config
             dateTimeNow = datetime.datetime.now()
