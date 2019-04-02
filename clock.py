@@ -24,8 +24,8 @@ def average_light_value (seconds=60):
     results = np.empty(0)
     timeCalled = datetime.datetime.now().hour * 360 + datetime.datetime.now().second + datetime.datetime.now().minute * 60
     while (datetime.datetime.now().hour * 360 + datetime.datetime.now().second + datetime.datetime.now().minute * 60 < timeCalled + seconds ):
-        print(datetime.datetime.now().second + datetime.datetime.now().minute * 60)
-        print(timeCalled + seconds)
+        # print(datetime.datetime.now().second + datetime.datetime.now().minute * 60)
+        # print(timeCalled + seconds)
         count = 0
     
         #Output on the pin for 
@@ -58,6 +58,7 @@ with open('config.json') as json_file:
     dateTimeNow = datetime.datetime.now()
     dayIndex = day_to_index(dateTimeNow.today().strftime("%A"))
     day = data["config"][dayIndex]
+    print(day)
     # if day is enabled
     if day['isEnabled']:
         triggered = False
@@ -66,7 +67,7 @@ with open('config.json') as json_file:
             # read light sensor for 1 minute
             # average result to set triggered to true or not
             value = average_light_value(5)
-            triggered = value >= 200
+            triggered = value <= 200
             print(value)
         else:
             # sleep 1 minute
