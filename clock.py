@@ -24,8 +24,8 @@ def average_light_value (seconds=60):
     results = np.empty(0)
     timeCalled = datetime.datetime.now().hour * 360 + datetime.datetime.now().second + datetime.datetime.now().minute * 60
     while (datetime.datetime.now().hour * 360 + datetime.datetime.now().second + datetime.datetime.now().minute * 60 < timeCalled + seconds ):
-        # print(datetime.datetime.now().second + datetime.datetime.now().minute * 60)
-        # print(timeCalled + seconds)
+        print(datetime.datetime.now().second + datetime.datetime.now().minute * 60)
+        print(timeCalled + seconds)
         count = 0
     
         #Output on the pin for 
@@ -43,7 +43,7 @@ def average_light_value (seconds=60):
         results = np.append(results, count)
 
     # GPIO.cleanup()
-    # print(results)
+    print(results)
     return np.mean(results)
 
 

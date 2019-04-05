@@ -38,7 +38,7 @@
        },
        {  
           "name":"Friday",
-          "isEnabled":false,
+          "isEnabled":true,
           "time":0,
           "lightActivated":true,
           "playSound":true,
