@@ -80,10 +80,10 @@ with open('config.json') as json_file:
         if triggered:
             if day["playSound"]:
                 # play sound
-                print('Sound is on')
+                print('Play sound')
             if day["openBlinds"]:
                 # activate blinds motor
-                pass
+                print('Opening blinds')
             if day["openWindow"]:
                 # activate window motor
-                pass
+                print('Opening window')
