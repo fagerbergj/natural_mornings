@@ -68,7 +68,7 @@ with open('config.json') as json_file:
             # average result to set triggered to true or not
             value = average_light_value(5)
             triggered = value <= 200
-            print(value)
+            print("Average: " + value)
         else:
             # sleep 1 minute
             time.sleep(6)
