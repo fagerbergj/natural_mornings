@@ -28,7 +28,6 @@ def average_light_value (seconds=60):
 
         results = np.append(results, count)
 
-    GPIO.cleanup()
     print(results)
     return np.mean(results)
 
@@ -45,6 +44,7 @@ with open('config.json') as json_file:
     day = data["config"][dayEnum]
     # if day is enabled
     if day['isEnabled']:
+        GPIO.setmode(GPIO.BOARD)
         activated = False
         # if light activated is true
         if day['lightActivated']:
@@ -101,4 +101,4 @@ with open('config.json') as json_file:
                 time.sleep(5)
                 GPIO.output(Motor2E,GPIO.LOW)
 
-            GPIO.cleanup()
+        GPIO.cleanup()
