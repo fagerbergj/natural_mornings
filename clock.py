@@ -28,7 +28,7 @@ def average_light_value (seconds=60):
 
         results = np.append(results, count)
 
-    # GPIO.cleanup()
+    GPIO.cleanup()
     print(results)
     return np.mean(results)
 
@@ -100,3 +100,5 @@ with open('config.json') as json_file:
 
                 time.sleep(5)
                 GPIO.output(Motor2E,GPIO.LOW)
+
+            GPIO.cleanup()
