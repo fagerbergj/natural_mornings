@@ -50,6 +50,7 @@ with open('config.json') as json_file:
         if day['lightActivated']:
             value = average_light_value(5)
             # if there is enough light and it is not night time (5am to 5pm)
+            print(dateTimeNow.hour)
             activated = value < 200 and dateTimeNow.hour > 5 and dateTimeNow.hour < 17
             print(value)
             # read light sensor for 1 minuet

@@ -3,7 +3,7 @@
       "MONDAY": {
          "isEnabled":true, 
          "time":480, 
-         "lightActivated":false, 
+         "lightActivated":true, 
          "playSound":true, 
          "openBlinds":true, 
          "openWindow":true
