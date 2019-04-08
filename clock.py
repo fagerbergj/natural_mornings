@@ -56,11 +56,10 @@ with open('config.json') as json_file:
             # read light sensor for 1 minuet
             # average result to set activated to true or not
         else:
-            # sleep 1 minute
-            time.sleep(6)
             # check to see if current time = time from config
             dateTimeNow = datetime.datetime.now()
             nowTimeInMin = dateTimeNow.minute + dateTimeNow.hour * 60
+            print("time " + nowTimeInMin " vs " + day['time'])
             activated = day['time'] == nowTimeInMin
         if activated:
 
