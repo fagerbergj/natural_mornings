@@ -40,6 +40,18 @@ class SoundThread (threading.Thread):
     def run (self):
           play_sound()
 
+class BlindsThread (threading.Thread):
+    def __init__(self):
+        threading.Thread.__init__(self)
+    def run (self):
+          open_blinds()
+
+class WindowThread (threading.Thread):
+    def __init__(self):
+        threading.Thread.__init__(self)
+    def run (self):
+          open_window()
+
 def play_sound():
     playsound('rainforest_ambience-GlorySunz-1938133500.mp3')
     playsound('Waterfall-SoundBible.com-1597727655.mp3')
@@ -115,10 +127,10 @@ with open('config.json') as json_file:
             if day["openBlinds"]:
                 # activate blinds motor
                 print('Opening blinds')
-                open_blinds()
+                BlindsThread()
             if day["openWindow"]:
                 # activate window motor
                 print('Opening window')
-                open_window()
+                WindowThread()
 
         GPIO.cleanup()
