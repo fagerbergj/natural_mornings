@@ -89,7 +89,7 @@ with open('config.json') as json_file:
                 GPIO.output(Motor1B,GPIO.LOW)
                 GPIO.output(Motor1E,GPIO.HIGH)
 
-                sleep(5)
+                time.sleep(5)
                 GPIO.output(Motor1E,GPIO.LOW)
             if day["openWindow"]:
                 # activate window motor
@@ -98,5 +98,5 @@ with open('config.json') as json_file:
                 GPIO.output(Motor2B,GPIO.LOW)
                 GPIO.output(Motor2E,GPIO.HIGH)
 
-                sleep(5)
+                time.sleep(5)
                 GPIO.output(Motor2E,GPIO.LOW)
