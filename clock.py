@@ -124,13 +124,13 @@ with open('config.json') as json_file:
         if activated:
             if day["playSound"]:
                 # play sound
-                SoundThread()
+                SoundThread().start()
                 # play_sound()
             if day["openBlinds"]:
                 # activate blinds motor
-                BlindsThread()
+                BlindsThread().start()
             if day["openWindow"]:
                 # activate window motor
-                WindowThread()
+                WindowThread().start()
 
         # GPIO.cleanup()
