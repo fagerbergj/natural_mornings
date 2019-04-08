@@ -5,8 +5,6 @@ import RPi.GPIO as GPIO
 import numpy as np
 
 GPIO.setmode(GPIO.BOARD)
-GPIO.setwarnings(False)
-
 
 def average_light_value (seconds=60):
     pin_to_circuit = 7
@@ -64,7 +62,7 @@ with open('config.json') as json_file:
             nowTimeInMin = dateTimeNow.minute + dateTimeNow.hour * 60
             activated = day['time'] == nowTimeInMin
         if activated:
-            
+
             Motor1A = 16
             Motor1B = 18
             Motor1E = 22
