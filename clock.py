@@ -56,7 +56,7 @@ with open('config.json') as json_file:
             # read light sensor for 1 minuet
             # average result to set activated to true or not
         else:
-            # sleep 1 minuet
+            # sleep 1 minute
             time.sleep(6)
             # check to see if current time = time from config
             dateTimeNow = datetime.datetime.now()
@@ -65,10 +65,10 @@ with open('config.json') as json_file:
         if activated:
             if day["playSound"]:
                 # play sound
-                pass
+                print('Play sound')
             if day["openBlinds"]:
                 # activate blinds motor
-                pass
+                print('Opening blinds')
             if day["openWindow"]:
                 # activate window motor
-                pass
+                print('Opening window')
