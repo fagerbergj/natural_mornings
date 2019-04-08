@@ -1,7 +1,24 @@
-import l293d
-# Motor 1 uses Pin 22, Pin 18, Pin 16
-motor1 = l293d.DC(22,18,16)
-# Run the motors so visible
-for i in range(0,150):
-  motor1.clockwise()
-l293d.cleanup()
+import RPi.GPIO as GPIO
+from time import sleep
+ 
+GPIO.setmode(GPIO.BOARD)
+ 
+Motor1A = 16
+Motor1B = 18
+Motor1E = 22
+ 
+GPIO.setup(Motor1A,GPIO.OUT)
+GPIO.setup(Motor1B,GPIO.OUT)
+GPIO.setup(Motor1E,GPIO.OUT)
+ 
+print ("Turning motor on")
+GPIO.output(Motor1A,GPIO.HIGH)
+GPIO.output(Motor1B,GPIO.LOW)
+GPIO.output(Motor1E,GPIO.HIGH)
+ 
+sleep(2)
+ 
+print ("Stopping motor")
+GPIO.output(Motor1E,GPIO.LOW)
+ 
+GPIO.cleanup()
