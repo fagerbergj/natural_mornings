@@ -5,6 +5,7 @@ import RPi.GPIO as GPIO
 import numpy as np
 
 GPIO.setmode(GPIO.BOARD)
+GPIO.setwarnings(False)
 
 Motor1A = 16
 Motor1B = 18
@@ -96,6 +97,6 @@ with open('config.json') as json_file:
                 GPIO.output(Motor2A,GPIO.HIGH)
                 GPIO.output(Motor2B,GPIO.LOW)
                 GPIO.output(Motor2E,GPIO.HIGH)
-                
+
                 sleep(5)
                 GPIO.output(Motor2E,GPIO.LOW)
