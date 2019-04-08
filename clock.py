@@ -59,7 +59,7 @@ with open('config.json') as json_file:
             # check to see if current time = time from config
             dateTimeNow = datetime.datetime.now()
             nowTimeInMin = dateTimeNow.minute + dateTimeNow.hour * 60
-            print("time " + nowTimeInMin " vs " + day['time'])
+            print("time " + str(nowTimeInMin) + " vs " + str(day['time']))
             activated = day['time'] == nowTimeInMin
         if activated:
 
