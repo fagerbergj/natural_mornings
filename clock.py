@@ -1,10 +1,10 @@
 import json
 import datetime
 import time
-# import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 import numpy as np
 
-# GPIO.setmode(GPIO.BOARD)
+GPIO.setmode(GPIO.BOARD)
 
 def average_light_value (seconds=60):
     pin_to_circuit = 7
