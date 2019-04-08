@@ -1,22 +1,10 @@
 import json
 import datetime
 import time
-import RPi.GPIO as GPIO
+# import RPi.GPIO as GPIO
 import numpy as np
 
-GPIO.setmode(GPIO.BOARD)
-
-def day_to_index(argument):
-    switcher = {
-        'Monday': 0,
-        'Tuesday': 1,
-        'Wednesday': 2,
-        'Thursday': 3,
-        'Friday': 4,
-        'Saturday': 5,
-        'Sunday': 6
-    }
-    return switcher.get(argument, "nothing")
+# GPIO.setmode(GPIO.BOARD)
 
 def average_light_value (seconds=60):
     pin_to_circuit = 7
@@ -24,8 +12,6 @@ def average_light_value (seconds=60):
     results = np.empty(0)
     timeCalled = datetime.datetime.now().hour * 360 + datetime.datetime.now().second + datetime.datetime.now().minute * 60
     while (datetime.datetime.now().hour * 360 + datetime.datetime.now().second + datetime.datetime.now().minute * 60 < timeCalled + seconds ):
-        print(datetime.datetime.now().second + datetime.datetime.now().minute * 60)
-        print(timeCalled + seconds)
         count = 0
     
         #Output on the pin for 
@@ -56,26 +42,27 @@ with open('config.json') as json_file:
     data = json.load(json_file)
     # get current day config
     dateTimeNow = datetime.datetime.now()
-    dayIndex = day_to_index(dateTimeNow.today().strftime("%A"))
-    day = data["config"][dayIndex]
+    dayEnum = dateTimeNow.today().strftime("%A").upper()
+    day = data["config"][dayEnum]
     # if day is enabled
     if day['isEnabled']:
-        triggered = False
+        activated = False
         # if light activated is true
         if day['lightActivated']:
             value = average_light_value(5)
-            triggered = value >= 200
+            # if there is enough light and it is not night time (5am to 5pm)
+            activated = value < 200 and dateTimeNow.hour > 5 and dateTimeNow.hour < 17
             print(value)
             # read light sensor for 1 minuet
-            # average result to set triggered to true or not
+            # average result to set activated to true or not
         else:
             # sleep 1 minuet
             time.sleep(6)
             # check to see if current time = time from config
             dateTimeNow = datetime.datetime.now()
             nowTimeInMin = dateTimeNow.minute + dateTimeNow.hour * 60
-            triggered = day['time'] == nowTimeInMin
-        if triggered:
+            activated = day['time'] == nowTimeInMin
+        if activated:
             if day["playSound"]:
                 # play sound
                 pass
