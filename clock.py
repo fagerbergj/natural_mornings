@@ -3,6 +3,8 @@ import datetime
 import time
 import RPi.GPIO as GPIO
 import numpy as np
+from playsound import playsound
+import threading
 
 GPIO.setmode(GPIO.BOARD)
 
@@ -31,6 +33,49 @@ def average_light_value (seconds=60):
     print(results)
     return np.mean(results)
 
+
+class SoundThread (threading.Thread):
+    def __init__(self):
+        threading.Thread.__init__(self)
+    def run (self):
+          play_sound()
+
+def play_sound():
+    playsound('rainforest_ambience-GlorySunz-1938133500.mp3')
+    playsound('Waterfall-SoundBible.com-1597727655.mp3')
+
+
+def open_blinds():
+    Motor1A = 16
+    Motor1B = 18
+    Motor1E = 22
+
+    GPIO.setup(Motor1A,GPIO.OUT)
+    GPIO.setup(Motor1B,GPIO.OUT)
+    GPIO.setup(Motor1E,GPIO.OUT)
+
+    GPIO.output(Motor1A,GPIO.HIGH)
+    GPIO.output(Motor1B,GPIO.LOW)
+    GPIO.output(Motor1E,GPIO.HIGH)
+
+    time.sleep(5)
+    GPIO.output(Motor1E,GPIO.LOW)
+
+def open_window():
+    Motor2A = 23
+    Motor2B = 21
+    Motor2E = 19
+
+    GPIO.setup(Motor2A,GPIO.OUT)
+    GPIO.setup(Motor2B,GPIO.OUT)
+    GPIO.setup(Motor2E,GPIO.OUT)
+
+    GPIO.output(Motor2A,GPIO.HIGH)
+    GPIO.output(Motor2B,GPIO.LOW)
+    GPIO.output(Motor2E,GPIO.HIGH)
+
+    time.sleep(5)
+    GPIO.output(Motor2E,GPIO.LOW)
 
 # While true
 # while(true):
@@ -62,43 +107,18 @@ with open('config.json') as json_file:
             print("time " + str(nowTimeInMin) + " vs " + str(day['time']))
             activated = day['time'] == nowTimeInMin
         if activated:
-
-            Motor1A = 16
-            Motor1B = 18
-            Motor1E = 22
-
-            Motor2A = 23
-            Motor2B = 21
-            Motor2E = 19
-
-            GPIO.setup(Motor1A,GPIO.OUT)
-            GPIO.setup(Motor1B,GPIO.OUT)
-            GPIO.setup(Motor1E,GPIO.OUT)
-
-            GPIO.setup(Motor2A,GPIO.OUT)
-            GPIO.setup(Motor2B,GPIO.OUT)
-            GPIO.setup(Motor2E,GPIO.OUT)
-            
             if day["playSound"]:
                 # play sound
                 print('Play sound')
+                SoundThread()
+                # play_sound()
             if day["openBlinds"]:
                 # activate blinds motor
                 print('Opening blinds')
-                GPIO.output(Motor1A,GPIO.HIGH)
-                GPIO.output(Motor1B,GPIO.LOW)
-                GPIO.output(Motor1E,GPIO.HIGH)
-
-                time.sleep(5)
-                GPIO.output(Motor1E,GPIO.LOW)
+                open_blinds()
             if day["openWindow"]:
                 # activate window motor
                 print('Opening window')
-                GPIO.output(Motor2A,GPIO.HIGH)
-                GPIO.output(Motor2B,GPIO.LOW)
-                GPIO.output(Motor2E,GPIO.HIGH)
-
-                time.sleep(5)
-                GPIO.output(Motor2E,GPIO.LOW)
+                open_window()
 
         GPIO.cleanup()
