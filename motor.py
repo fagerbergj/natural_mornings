@@ -15,7 +15,7 @@ def setup():
 
 def loop():
 	while True:
-		print 'Press Ctrl+C to end the program...'
+		print ('Press Ctrl+C to end the program...')
 		GPIO.output(MotorEnable, GPIO.HIGH) # motor driver enable
 		GPIO.output(MotorPin1, GPIO.HIGH)  # clockwise
 		GPIO.output(MotorPin2, GPIO.LOW)
