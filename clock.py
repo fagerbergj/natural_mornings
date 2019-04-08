@@ -53,11 +53,13 @@ class WindowThread (threading.Thread):
           open_window()
 
 def play_sound():
+    print('Play sound')
     playsound('rainforest_ambience-GlorySunz-1938133500.mp3')
     playsound('Waterfall-SoundBible.com-1597727655.mp3')
 
 
 def open_blinds():
+    print('Opening blinds')
     Motor1A = 16
     Motor1B = 18
     Motor1E = 22
@@ -74,6 +76,7 @@ def open_blinds():
     GPIO.output(Motor1E,GPIO.LOW)
 
 def open_window():
+    print('Opening window')
     Motor2A = 23
     Motor2B = 21
     Motor2E = 19
@@ -101,7 +104,7 @@ with open('config.json') as json_file:
     day = data["config"][dayEnum]
     # if day is enabled
     if day['isEnabled']:
-        GPIO.setmode(GPIO.BOARD)
+        # GPIO.setmode(GPIO.BOARD)
         activated = False
         # if light activated is true
         if day['lightActivated']:
@@ -121,16 +124,13 @@ with open('config.json') as json_file:
         if activated:
             if day["playSound"]:
                 # play sound
-                print('Play sound')
                 SoundThread()
                 # play_sound()
             if day["openBlinds"]:
                 # activate blinds motor
-                print('Opening blinds')
                 BlindsThread()
             if day["openWindow"]:
                 # activate window motor
-                print('Opening window')
                 WindowThread()
 
-        GPIO.cleanup()
+        # GPIO.cleanup()
