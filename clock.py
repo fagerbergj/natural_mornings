@@ -53,9 +53,11 @@ class WindowThread (threading.Thread):
           open_window()
 
 def play_sound():
-    pygame.init()
-    pygame.mixer.Channel(0).play(pygame.mixer.Sound('Waterfall-SoundBible.com-1597727655.wav'))
-    pygame.mixer.Channel(1).play(pygame.mixer.Sound('rainforest_ambience-GlorySunz-1938133500.wav'))
+    pygame.mixer.init()
+    pygame.mixer.music.load("rainforest_ambience-GlorySunz-1938133500.wav")
+    pygame.mixer.music.play()
+    while pygame.mixer.music.get_busy() == True:
+        continue
     print('Play sound')
     
 
