@@ -3,7 +3,7 @@ import datetime
 import time
 import RPi.GPIO as GPIO
 import numpy as np
-from playsound import playsound
+import pygame
 import threading
 
 GPIO.setmode(GPIO.BOARD)
@@ -53,9 +53,11 @@ class WindowThread (threading.Thread):
           open_window()
 
 def play_sound():
+    pygame.init()
+    pygame.mixer.Channel(0).play(pygame.mixer.Sound('Waterfall-SoundBible.com-1597727655.wav'))
+    pygame.mixer.Channel(1).play(pygame.mixer.Sound('rainforest_ambience-GlorySunz-1938133500.wav'))
     print('Play sound')
-    playsound('rainforest_ambience-GlorySunz-1938133500.mp3')
-    playsound('Waterfall-SoundBible.com-1597727655.mp3')
+    
 
 
 def open_blinds():
@@ -124,8 +126,8 @@ with open('config.json') as json_file:
         if activated:
             if day["playSound"]:
                 # play sound
-                # SoundThread().start()
-                play_sound()
+                SoundThread().start()
+                # play_sound()
             if day["openBlinds"]:
                 # activate blinds motor
                 BlindsThread().start()
