@@ -139,5 +139,6 @@ with open('config.json') as json_file:
                 # activate window motor
                 print("Open Window Thread Spawn")
                 WindowThread().start()
-        time.sleep(15)
-        GPIO.cleanup()
+        while pygame.mixer.music.get_busy() == True:
+            continue
+    GPIO.cleanup()
