@@ -2,7 +2,8 @@ import os
 import glob
 import time
 import RPi.GPIO as GPIO
-from bluetooth import *
+import bluetooth
+import json
 
 os.system('modprobe w1-gpio')
 os.system('modprobe w1-therm')
@@ -10,29 +11,29 @@ os.system('modprobe w1-therm')
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(17, GPIO.OUT)
 
-base_dir = '/sys/bus/w1/devices/'
-device_folder = glob.glob(base_dir + '28*')[0]
-device_file = device_folder + '/w1_slave'
+#base_dir = '/sys/bus/w1/devices/'
+#device_folder = glob.glob(base_dir + '28*')[0]
+#device_file = device_folder + '/w1_slave'
 
 
-def read_temp_raw():
-    f = open(device_file, 'r')
-    lines = f.readlines()
-    f.close() 
-    return lines
+#def read_temp_raw():
+#    f = open(device_file, 'r')
+#    lines = f.readlines()
+#    f.close()
+#    return lines
 
 
-def read_temp():
-    lines = read_temp_raw()
-    while lines[0].strip()[-3:] != 'YES':
-        time.sleep(0.2)
-        lines = read_temp_raw()
-    equals_pos = lines[1].find('t=')
-    if equals_pos != -1:
-        temp_string = lines[1][equals_pos + 2:]
-        temp_c = float(temp_string) / 1000.0
-        temp_f = temp_c * 9.0 / 5.0 + 32.0
-        return temp_c
+#def read_temp():
+#    lines = read_temp_raw()
+#    while lines[0].strip()[-3:] != 'YES':
+#        time.sleep(0.2)
+#        lines = read_temp_raw()
+#    equals_pos = lines[1].find('t=')
+#    if equals_pos != -1:
+#        temp_string = lines[1][equals_pos + 2:]
+#        temp_c = float(temp_string) / 1000.0
+#        temp_f = temp_c * 9.0 / 5.0 + 32.0
+#        return temp_c
 
 
 # while True:
@@ -41,7 +42,7 @@ def read_temp():
 
 
 server_sock = BluetoothSocket(RFCOMM)
-server_sock.bind(("", PORT_ANY))
+server_sock.bind(("", bluetooth.PORT_ANY))
 server_sock.listen(1)
 
 port = server_sock.getsockname()[1]
@@ -60,21 +61,24 @@ while True:
     client_sock, client_info = server_sock.accept()
     print("Accepted connection from ", client_info)
 
+
+
     try:
         data = client_sock.recv(1024)
         if len(data) == 0: break
         print("received [%s]" % data)
-
-        if data == 'temp':
-            data = str(read_temp()) + '!'
-        elif data == 'lightOn':
-            GPIO.output(17, False)
-            data = 'light on!'
-        elif data == 'lightOff':
-            GPIO.output(17, True)
-            data = 'light off!'
-        else:
-            data = 'WTF!'
+        with open('data.json', 'w') as outfile:
+            json.dump(data, outfile)
+#        if data == 'temp':
+#            data = str(read_temp()) + '!'
+#        elif data == 'lightOn':
+#            GPIO.output(17, False)
+#            data = 'light on!'
+#        elif data == 'lightOff':
+#            GPIO.output(17, True)
+#            data = 'light off!'
+#        else:
+#            data = 'WTF!'
         client_sock.send(data)
         print("sending [%s]" % data)
 
