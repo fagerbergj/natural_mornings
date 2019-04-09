@@ -7,7 +7,7 @@ import pygame
 import threading
 
 GPIO.setmode(GPIO.BOARD)
-GPIO.setWarnings(False)
+GPIO.setwarnings(False)
 
 def average_light_value (seconds=60):
     pin_to_circuit = 7
@@ -114,7 +114,6 @@ with open('config.json') as json_file:
         if day['lightActivated']:
             value = average_light_value(30)
             # if there is enough light and it is not night time (5am to 5pm)
-            print(dateTimeNow.hour)
             activated = value < 200 and dateTimeNow.hour > 5 and dateTimeNow.hour < 17
             print(value)
             # read light sensor for 1 minuet
@@ -129,8 +128,8 @@ with open('config.json') as json_file:
             if day["playSound"]:
                 # play sound
                 print("Play Sound")
-                SoundThread().start()
-                #play_sound()
+                # SoundThread().start()
+                play_sound()
             if day["openBlinds"]:
                 # activate blinds motor
                 print("Open Blinds Thread Spawn")
