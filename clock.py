@@ -7,6 +7,7 @@ import pygame
 import threading
 
 GPIO.setmode(GPIO.BOARD)
+GPIO.setWarnings(False)
 
 def average_light_value (seconds=60):
     pin_to_circuit = 7
