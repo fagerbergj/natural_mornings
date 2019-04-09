@@ -2,7 +2,7 @@ import os
 import glob
 import time
 import RPi.GPIO as GPIO
-from bluetooth import *
+import bluetooth
 
 os.system('modprobe w1-gpio')
 os.system('modprobe w1-therm')
@@ -40,7 +40,7 @@ GPIO.setup(17, GPIO.OUT)
 #	time.sleep(1)
 
 
-server_sock = BluetoothSocket(RFCOMM)
+server_sock = bluetooth.BluetoothSocket(RFCOMM)
 server_sock.bind(("", PORT_ANY))
 server_sock.listen(1)
 
