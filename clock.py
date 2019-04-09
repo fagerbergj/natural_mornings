@@ -5,7 +5,6 @@ import RPi.GPIO as GPIO
 import numpy as np
 import pygame
 import threading
-import winsound
 
 GPIO.setmode(GPIO.BOARD)
 
@@ -112,7 +111,7 @@ with open('config.json') as json_file:
         activated = False
         # if light activated is true
         if day['lightActivated']:
-            value = average_light_value(5)
+            value = average_light_value(30)
             # if there is enough light and it is not night time (5am to 5pm)
             print(dateTimeNow.hour)
             activated = value < 200 and dateTimeNow.hour > 5 and dateTimeNow.hour < 17
