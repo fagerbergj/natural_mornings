@@ -128,7 +128,7 @@ with open('config.json') as json_file:
             if day["playSound"]:
                 # play sound
                 print("Play Sound")
-                #SoundThread().start()
+                SoundThread().start()
                 #play_sound()
             if day["openBlinds"]:
                 # activate blinds motor
