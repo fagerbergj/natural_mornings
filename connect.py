@@ -18,7 +18,7 @@ device_file = device_folder + '/w1_slave'
 def read_temp_raw():
     f = open(device_file, 'r')
     lines = f.readlines()
-    f.close()
+    f.close() 
     return lines
 
 
@@ -55,15 +55,15 @@ advertise_service(server_sock, "AquaPiServer",
                   #                   protocols = [ OBEX_UUID ]
                   )
 while True:
-    print "Waiting for connection on RFCOMM channel %d" % port
+    print("Waiting for connection on RFCOMM channel %d" % port)
 
     client_sock, client_info = server_sock.accept()
-    print "Accepted connection from ", client_info
+    print("Accepted connection from ", client_info)
 
     try:
         data = client_sock.recv(1024)
         if len(data) == 0: break
-        print "received [%s]" % data
+        print("received [%s]" % data)
 
         if data == 'temp':
             data = str(read_temp()) + '!'
@@ -76,17 +76,17 @@ while True:
         else:
             data = 'WTF!'
         client_sock.send(data)
-        print "sending [%s]" % data
+        print("sending [%s]" % data)
 
     except IOError:
         pass
 
     except KeyboardInterrupt:
 
-        print "disconnected"
+        print("disconnected")
 
         client_sock.close()
         server_sock.close()
-        print "all done"
+        print("all done")
 
         break
