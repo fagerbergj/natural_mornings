@@ -75,7 +75,7 @@ def open_blinds():
     GPIO.output(Motor1B,GPIO.LOW)
     GPIO.output(Motor1E,GPIO.HIGH)
 
-    time.sleep(5)
+    time.sleep(10)
     GPIO.output(Motor1E,GPIO.LOW)
 
 def open_window():
@@ -92,7 +92,7 @@ def open_window():
     GPIO.output(Motor2B,GPIO.LOW)
     GPIO.output(Motor2E,GPIO.HIGH)
 
-    time.sleep(5)
+    time.sleep(10)
     GPIO.output(Motor2E,GPIO.LOW)
 
 # While true
@@ -112,7 +112,7 @@ with open('config.json') as json_file:
         activated = False
         # if light activated is true
         if day['lightActivated']:
-            value = average_light_value(3)
+            value = average_light_value(30)
             # if there is enough light and it is not night time (5am to 5pm)
             activated = value < 500 and dateTimeNow.hour > 5 and dateTimeNow.hour < 17
             print(value)
