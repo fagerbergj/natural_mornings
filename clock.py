@@ -5,6 +5,7 @@ import RPi.GPIO as GPIO
 import numpy as np
 import pygame
 import threading
+import winsound
 
 GPIO.setmode(GPIO.BOARD)
 
@@ -55,9 +56,7 @@ class WindowThread (threading.Thread):
 def play_sound():
     pygame.mixer.init()
     pygame.mixer.music.load("rainforest_ambience-GlorySunz-1938133500.wav")
-    pygame.mixer.music.play()
-    while pygame.mixer.music.get_busy() == True:
-        continue
+    pygame.mixer.music.play(999)
     print('Play sound')
     
 
@@ -133,11 +132,11 @@ with open('config.json') as json_file:
                 #play_sound()
             if day["openBlinds"]:
                 # activate blinds motor
-                print("Open Blinds")
+                print("Open Blinds Thread Spawn")
                 BlindsThread().start()
             if day["openWindow"]:
                 # activate window motor
-                print("Open Window")
+                print("Open Window Thread Spawn")
                 WindowThread().start()
 
         # GPIO.cleanup()
