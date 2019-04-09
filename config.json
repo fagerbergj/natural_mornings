@@ -1,11 +1,11 @@
 {
    "config":{
       "MONDAY": {
-         "isEnabled":true, 
-         "time":480, 
+         "isEnabled":false, 
+         "time":320, 
          "lightActivated":true, 
          "playSound":true, 
-         "openBlinds":true, 
+         "openBlinds":false, 
          "openWindow":true
       },
       "TUESDAY": {
@@ -17,8 +17,8 @@
          "openWindow":true
       },
       "WEDNESDAY": {
-         "isEnabled":false, 
-         "time":480, 
+         "isEnabled":true, 
+         "time":600, 
          "lightActivated":true, 
          "playSound":true, 
          "openBlinds":true, 
