@@ -98,7 +98,8 @@ def open_window():
 # While true
 # while(true):
     # Pull config from files
-with open('config.json') as json_file: 
+with open('config.json') as json_file:
+    GPIO.setmode(GPIO.BOARD) 
     # Parse config into array 
     data = json.load(json_file)
     # get current day config
@@ -138,5 +139,5 @@ with open('config.json') as json_file:
                 # activate window motor
                 print("Open Window Thread Spawn")
                 WindowThread().start()
-
-        # GPIO.cleanup()
+        time.sleep(15)
+        GPIO.cleanup()
