@@ -112,7 +112,7 @@ with open('config.json') as json_file:
         activated = False
         # if light activated is true
         if day['lightActivated']:
-            value = average_light_value(30)
+            value = average_light_value(3)
             # if there is enough light and it is not night time (5am to 5pm)
             activated = value < 200 and dateTimeNow.hour > 5 and dateTimeNow.hour < 17
             print(value)
@@ -125,11 +125,6 @@ with open('config.json') as json_file:
             print("time " + str(nowTimeInMin) + " vs " + str(day['time']))
             activated = day['time'] == nowTimeInMin
         if activated:
-            if day["playSound"]:
-                # play sound
-                print("Play Sound")
-                # SoundThread().start()
-                play_sound()
             if day["openBlinds"]:
                 # activate blinds motor
                 print("Open Blinds Thread Spawn")
@@ -138,6 +133,13 @@ with open('config.json') as json_file:
                 # activate window motor
                 print("Open Window Thread Spawn")
                 WindowThread().start()
-        while pygame.mixer.music.get_busy() == True:
-            continue
+            if day["playSound"]:
+                # play sound
+                print("Play Sound")
+                # SoundThread().start()
+                pygame.mixer.init()
+                pygame.mixer.music.load("rainforest_ambience-GlorySunz-1938133500.wav")
+                pygame.mixer.music.play()
+                while pygame.mixer.music.get_busy() == True:
+                    continue
     GPIO.cleanup()
