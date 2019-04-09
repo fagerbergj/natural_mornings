@@ -2,10 +2,10 @@ import os
 import glob
 import time
 import RPi.GPIO as GPIO
-from bluetooth import *
+import bluetooth
 
-os.system('modprobe w1-gpio')
-os.system('modprobe w1-therm')
+# os.system('modprobe w1-gpio')
+# os.system('modprobe w1-therm')
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(17, GPIO.OUT)
