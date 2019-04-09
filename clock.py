@@ -56,7 +56,7 @@ class WindowThread (threading.Thread):
 def play_sound():
     pygame.mixer.init()
     pygame.mixer.music.load("rainforest_ambience-GlorySunz-1938133500.wav")
-    pygame.mixer.music.play(999)
+    pygame.mixer.music.play()
     print('Play sound')
     
 
